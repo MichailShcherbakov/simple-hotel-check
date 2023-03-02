@@ -8,6 +8,7 @@ export type UiTextFieldProps<TValue extends TextFieldValue> = {
   error?: boolean;
   helperText?: string;
   type?: "text" | "number";
+  labelClassName?: string;
   value?: TValue;
   onChange?: (value: TValue) => void;
 };
@@ -22,6 +23,7 @@ export function UiTextField<TValue extends TextFieldValue>(
     error,
     helperText,
     type = "text",
+    labelClassName,
     onChange,
   } = props;
 
@@ -33,9 +35,13 @@ export function UiTextField<TValue extends TextFieldValue>(
     <div className="flex flex-col gap-2">
       <label
         htmlFor={id}
-        className={clsx("text-gray-500 font-light", {
-          "text-red-300": error,
-        })}
+        className={clsx(
+          "text-gray-500 font-light",
+          {
+            "text-red-300": error,
+          },
+          labelClassName,
+        )}
       >
         {label}
       </label>

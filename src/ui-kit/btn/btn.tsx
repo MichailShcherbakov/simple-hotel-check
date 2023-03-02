@@ -4,17 +4,15 @@ import "./btn.scss";
 
 export type UiButtonProps = {
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
-export function UiButton(props: UiButtonProps) {
-  const { className } = props;
-
+export function UiButton({ className, ...props }: UiButtonProps) {
   return (
     <button
       {...props}
       className={clsx(
-        "ui-btn-bg text-white font-medium rounded py-3.5 px-9 w-min hover:cursor-pointer active:cursor-pointer",
+        "ui-btn-bg text-white font-medium rounded py-3.5 px-9 hover:cursor-pointer active:cursor-pointer",
         className,
       )}
     />
