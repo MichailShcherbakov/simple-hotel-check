@@ -7,7 +7,7 @@ export type UiRatingProps = {
   onChange?: (value: number) => void;
 };
 
-export const UiRating: React.FC<UiRatingProps> = props => {
+export function UiRating(props: UiRatingProps) {
   const { value = 0, onChange } = props;
 
   function clickHandler(idx: number) {
@@ -32,4 +32,4 @@ export const UiRating: React.FC<UiRatingProps> = props => {
       ))}
     </div>
   );
-};
+}

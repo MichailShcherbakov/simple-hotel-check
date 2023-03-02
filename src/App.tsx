@@ -14,10 +14,20 @@ export default function App() {
 
   const [likeBtnState, setLikeBtnState] = React.useState(true);
 
+  const [numericTextFieldState, setNumericTextFieldState] =
+    React.useState<string>("");
+
   return (
     <div className="flex flex-col p-6 gap-6">
       <UiButton>Войти</UiButton>
       <UiTextField id="sing-in" label="Логин" />
+      <UiTextField
+        id="sing-in"
+        type="number"
+        label="Количество дней"
+        value={numericTextFieldState}
+        onChange={value => setNumericTextFieldState(value)}
+      />
       <UiTextField
         id="sing-in-error"
         error

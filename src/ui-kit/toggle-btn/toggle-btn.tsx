@@ -24,7 +24,7 @@ const NextToggleButtonState: Record<
   [UiToggleButtonStateEnum.DESC]: UiToggleButtonStateEnum.ASC,
 };
 
-export const UiToggleButton: React.FC<UiToggleButtonProps> = props => {
+export function UiToggleButton(props: UiToggleButtonProps) {
   const {
     label,
     state = UiToggleButtonStateEnum.DESC,
@@ -67,4 +67,4 @@ export const UiToggleButton: React.FC<UiToggleButtonProps> = props => {
       />
     </button>
   );
-};
+}

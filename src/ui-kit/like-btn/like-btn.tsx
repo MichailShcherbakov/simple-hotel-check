@@ -6,7 +6,7 @@ export type UiLikeButtonProps = {
   onChange?: (value: boolean) => void;
 };
 
-export const UiLikeButton: React.FC<UiLikeButtonProps> = props => {
+export function UiLikeButton(props: UiLikeButtonProps) {
   const { value, onChange } = props;
 
   return (
@@ -23,4 +23,4 @@ export const UiLikeButton: React.FC<UiLikeButtonProps> = props => {
       />
     </button>
   );
-};
+}

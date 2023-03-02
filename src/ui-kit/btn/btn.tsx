@@ -5,7 +5,7 @@ export type UiButtonProps = {
   children: React.ReactNode;
 };
 
-export const UiButton: React.FC<UiButtonProps> = props => {
+export function UiButton(props: UiButtonProps) {
   const { children } = props;
 
   return (
@@ -16,4 +16,4 @@ export const UiButton: React.FC<UiButtonProps> = props => {
       {children}
     </button>
   );
-};
+}
