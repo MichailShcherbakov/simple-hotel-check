@@ -42,7 +42,7 @@ export function UiTextField<TValue extends TextFieldValue>(
       <input
         id={id}
         type={type}
-        className={clsx("p-4 border border-gray-100 rounded", {
+        className={clsx("p-3.5 border border-gray-100 rounded", {
           "text-red-300": error,
         })}
         value={value}
