@@ -1,5 +1,6 @@
 import React from "react";
 import { UiButton } from "./ui-kit/btn";
+import { UiLikeButton } from "./ui-kit/like-btn";
 import { UiRating } from "./ui-kit/rating";
 import { UiTextField } from "./ui-kit/text-field";
 import { UiToggleButton, UiToggleButtonStateEnum } from "./ui-kit/toggle-btn";
@@ -10,6 +11,8 @@ export default function App() {
   );
 
   const [ratingState, setRatingState] = React.useState(0);
+
+  const [likeBtnState, setLikeBtnState] = React.useState(true);
 
   return (
     <div className="flex flex-col p-6 gap-6">
@@ -28,6 +31,10 @@ export default function App() {
       />
       <UiToggleButton label="Цена" disabled />
       <UiRating value={ratingState} onChange={val => setRatingState(val)} />
+      <UiLikeButton
+        value={likeBtnState}
+        onChange={val => setLikeBtnState(val)}
+      />
     </div>
   );
 }
