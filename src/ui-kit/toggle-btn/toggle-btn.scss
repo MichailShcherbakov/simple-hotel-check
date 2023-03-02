@@ -1,0 +1,13 @@
+.toggle-btn {
+  &--asc {
+    & > #desc {
+      fill-opacity: 0.3;
+    }
+  }
+
+  &--desc {
+    & > #asc {
+      fill-opacity: 0.3;
+    }
+  }
+}

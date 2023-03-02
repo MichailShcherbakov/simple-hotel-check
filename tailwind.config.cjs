@@ -25,6 +25,10 @@ module.exports = {
       "blue": {
         400: "#3877AF",
       },
+      "yellow": {
+        300: "#6C6845",
+        400: "#CDBC1E"
+      }
     },
     extend: {
       spacing: {
