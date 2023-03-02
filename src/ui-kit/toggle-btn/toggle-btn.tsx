@@ -40,8 +40,9 @@ export const UiToggleButton: React.FC<UiToggleButtonProps> = props => {
   return (
     <button
       className={clsx(
-        "flex flex-row items-center gap-1 px-2 py-1 border border-green-400 rounded w-min",
+        "flex flex-row items-center gap-1 px-2 py-1 border rounded w-min select-none",
         {
+          "border-green-400": !disabled,
           "border-gray-300": disabled,
         },
         className,
@@ -50,7 +51,8 @@ export const UiToggleButton: React.FC<UiToggleButtonProps> = props => {
       disabled={disabled}
     >
       <span
-        className={clsx("text-sm font-base text-green-400", {
+        className={clsx("text-sm font-base ", {
+          "text-green-400": !disabled,
           "text-gray-400": disabled,
         })}
       >
@@ -59,6 +61,7 @@ export const UiToggleButton: React.FC<UiToggleButtonProps> = props => {
       <SelectIcon
         className={clsx("text-green-400", {
           "text-gray-400": disabled,
+          "text-green-400": !disabled,
           [`toggle-btn--${state}`]: !disabled,
         })}
       />
