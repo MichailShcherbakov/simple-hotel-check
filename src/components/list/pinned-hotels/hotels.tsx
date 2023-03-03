@@ -1,9 +1,9 @@
 import React from "react";
-import { useHotels, usePinHotel } from "../../../store/hotel/hooks";
+import { usePinHotel, usePinnedHotels } from "../../../store/hotel/hooks";
 import { HotelCard } from "../../hotel-card";
 
-export function HotelList() {
-  const { hotels } = useHotels();
+export function PinnedHotelList() {
+  const { hotels } = usePinnedHotels();
   const { isPinned, pinHotel, unpinHotel } = usePinHotel();
 
   const onPin = React.useCallback((suggestionId: string) => {

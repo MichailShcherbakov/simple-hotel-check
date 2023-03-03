@@ -1,7 +1,12 @@
 import React from "react";
 import { GetHotelsOptions } from "../../api/hotels";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { requestHotelsAction, setHotelCriteriaAction } from "./actions";
+import {
+  pinHotelAction,
+  requestHotelsAction,
+  setHotelCriteriaAction,
+  unpinHotelAction,
+} from "./actions";
 
 export function useHotelCriteria() {
   const criteria = useAppSelector(state => state.hotels.criteria);
@@ -33,6 +38,38 @@ export function useHotels() {
 
   return {
     loadHotels,
+    hotels,
+  };
+}
+
+export function usePinHotel() {
+  const pinned = useAppSelector(state => state.hotels.pinned);
+
+  const dispatch = useAppDispatch();
+
+  function isPinned(suggestionId: string) {
+    return !!pinned[suggestionId];
+  }
+
+  function pinHotel(suggestionId: string) {
+    dispatch(pinHotelAction({ suggestionId }));
+  }
+
+  function unpinHotel(suggestionId: string) {
+    dispatch(unpinHotelAction({ suggestionId }));
+  }
+
+  return {
+    isPinned,
+    pinHotel,
+    unpinHotel,
+  };
+}
+
+export function usePinnedHotels() {
+  const hotels = useAppSelector(state => state.hotels.pinned);
+
+  return {
     hotels,
   };
 }

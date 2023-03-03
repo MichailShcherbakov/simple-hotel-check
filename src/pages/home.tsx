@@ -3,13 +3,15 @@ import { AppBar } from "../components/app-bar";
 import { Carousel } from "../components/carousel";
 import { HotelSearchForm } from "../components/forms/hotel-search";
 import { HotelList } from "../components/list/hotels";
+import { PinnedHotelList } from "../components/list/pinned-hotels";
 import { LogOutButton } from "../components/log-out-btn";
-import { useHotelCriteria } from "../store/hotel/hooks";
+import { useHotelCriteria, usePinnedHotels } from "../store/hotel/hooks";
 import { UiPaper } from "../ui-kit/paper";
 import { UiToggleButton } from "../ui-kit/toggle-btn";
 
 export function HomePage() {
   const { criteria } = useHotelCriteria();
+  const { hotels } = usePinnedHotels();
 
   return (
     <div className="relative w-screen h-screen flex flex-col bg-gray-10">
@@ -26,7 +28,7 @@ export function HomePage() {
                 <UiToggleButton label="Рейтинг" />
                 <UiToggleButton label="Цена" disabled />
               </div>
-              <div className="flex flex-col gap-4 w-full h-full overflow-auto"></div>
+              <PinnedHotelList />
             </UiPaper>
           </div>
           <UiPaper className="flex flex-col w-full px-8 py-12 gap-7 overflow-hidden">
@@ -49,7 +51,7 @@ export function HomePage() {
             </div>
             <div className="flex flex-row item-center">
               <p className="font-light text-gray-500 text-base">
-                Добавлено в Избранное: {3} отеля
+                Добавлено в Избранное: {Object.values(hotels).length} отеля
               </p>
             </div>
             <HotelList />

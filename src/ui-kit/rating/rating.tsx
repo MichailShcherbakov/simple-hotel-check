@@ -4,11 +4,12 @@ import { ReactComponent as StarIcon } from "../../assets/icons/star.svg";
 export type UiRatingProps = {
   /** starts with 1 */
   value?: number;
+  readOnly?: boolean;
   onChange?: (value: number) => void;
 };
 
 export function UiRating(props: UiRatingProps) {
-  const { value = 0, onChange } = props;
+  const { value = 0, readOnly, onChange } = props;
 
   function clickHandler(idx: number) {
     if (value === idx + 1) {
@@ -23,9 +24,10 @@ export function UiRating(props: UiRatingProps) {
       {new Array(5).fill(0).map((_, idx) => (
         <StarIcon
           key={idx}
-          className={clsx("text-rad-400 cursor-pointer", {
+          className={clsx("text-rad-400", {
             "text-yellow-400": value >= idx + 1,
             "text-yellow-300": value < idx + 1,
+            "cursor-pointer": !readOnly,
           })}
           onClick={() => clickHandler(idx)}
         />

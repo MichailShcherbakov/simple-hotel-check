@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DateTime } from "luxon";
 import {
+  pinHotelAction,
+  unpinHotelAction,
   requestHotelsAction,
   setHotelCriteriaAction,
   setHotelsAction,
@@ -17,6 +19,7 @@ export enum HotelRequestStatusEnum {
 
 export type HotelState = {
   all: Record<number, Hotel>;
+  pinned: Record<string, Hotel>;
   criteria: {
     location: string;
     checkIn: string;
@@ -38,6 +41,7 @@ function getInitialHotelCriteria() {
 
 const initialState: HotelState = {
   all: {},
+  pinned: {},
   criteria: getInitialHotelCriteria(),
   status: HotelRequestStatusEnum.IDLE,
 };
@@ -65,6 +69,18 @@ const hotelSlice = createSlice({
           },
           {},
         );
+      })
+      .addCase(pinHotelAction, (state, action) => {
+        const suggestion = Object.values(state.all).find(
+          hotel => hotel.suggestionId === action.payload.suggestionId,
+        );
+
+        if (!suggestion) return;
+
+        state.pinned[action.payload.suggestionId] = suggestion;
+      })
+      .addCase(unpinHotelAction, (state, action) => {
+        delete state.pinned[action.payload.suggestionId];
       });
   },
 });

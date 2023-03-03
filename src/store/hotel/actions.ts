@@ -18,3 +18,11 @@ export const setHotelsAction = createAction<{ hotels: Hotel[] }>(
 export const setHotelCriteriaAction = createAction<GetHotelsOptions>(
   "setHotelCriteriaAction",
 );
+
+export const pinHotelAction = createAction<{ suggestionId: string }>(
+  "pinHotelAction",
+);
+
+export const unpinHotelAction = createAction<{ suggestionId: string }>(
+  "unpinHotelAction",
+);

@@ -28,6 +28,7 @@ export const HotelApi = {
 
     const hotels = data.map(hotel => ({
       ...hotel,
+      suggestionId: `${hotel.hotelId}-${hotel.locationId}-${hotel.priceFrom}-${hotel.checkIn}-${hotel.checkOut}`,
       checkIn: options.checkIn,
       checkOut: options.checkOut,
     }));
