@@ -4,7 +4,7 @@ import React from "react";
 export type UiTextFieldProps = {
   id: string;
   name?: string;
-  type?: "text" | "number";
+  type?: "text" | "number" | "date";
   label: string;
   error?: boolean;
   helperText?: string;
@@ -18,6 +18,7 @@ export type UiTextFieldProps = {
 function _UiTextField(props: UiTextFieldProps) {
   const {
     id,
+    name,
     label,
     value,
     error,
@@ -33,13 +34,7 @@ function _UiTextField(props: UiTextFieldProps) {
     const value = e.target.value;
 
     if (type === "number") {
-      return onChange?.({
-        ...e,
-        target: {
-          ...e.target,
-          value: Math.max(min, Math.min(max, Number(value))).toString(),
-        },
-      });
+      e.target.value = Math.max(min, Math.min(max, Number(value))).toString();
     }
 
     onChange?.(e);
@@ -61,6 +56,7 @@ function _UiTextField(props: UiTextFieldProps) {
       </label>
       <input
         id={id}
+        name={name}
         type={type}
         className={clsx("p-3 border border-gray-100 rounded", {
           "text-red-300": error,

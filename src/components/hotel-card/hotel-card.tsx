@@ -1,18 +1,19 @@
 import { UiLikeButton } from "../../ui-kit/like-btn";
 import { UiRating } from "../../ui-kit/rating";
-import { DateTime } from "luxon";
+import { DateTime, Duration, Interval } from "luxon";
 
 export type HotelCardProps = {
   title: string;
-  checkInDate: Date;
-  numDays: number;
+  checkIn: string;
+  checkOut: string;
   rating: number;
   price: number;
   pinned?: boolean;
 };
 
 export function HotelCard(props: HotelCardProps) {
-  const { title, checkInDate, numDays, rating, price, pinned } = props;
+  const { title, checkIn, checkOut, rating, price, pinned } = props;
+
   return (
     <div className="flex flex-col w-full gap-1">
       <div className="flex flex-row items-center justify-between">
@@ -21,10 +22,16 @@ export function HotelCard(props: HotelCardProps) {
       </div>
       <div className="flex flex-row items-center gap-4">
         <p className="text-gray-400 font-normal text-sm">
-          {DateTime.fromJSDate(checkInDate).toFormat("dd LLLL, yyyy")}
+          {DateTime.fromISO(checkIn).toFormat("dd LLLL, yyyy")}
         </p>
         <hr className="w-2.5" />
-        <p className="text-gray-400 font-normal text-sm">{numDays} дней</p>
+        <p className="text-gray-400 font-normal text-sm">
+          {Interval.fromDateTimes(
+            DateTime.fromISO(checkIn),
+            DateTime.fromISO(checkOut),
+          ).length("days")}{" "}
+          дней
+        </p>
       </div>
       <div className="flex flex-row  items-center justify-between">
         <UiRating value={rating} />
