@@ -1,17 +1,29 @@
 import { useFormik } from "formik";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router";
+import { HOME_PAGE_PATH } from "../../../router";
 import { UiButton } from "../../../ui-kit/btn";
 import { UiTextField } from "../../../ui-kit/text-field";
+import { AUTH_COOKIE_NAME } from "../../auth-provider";
 import { SignInSchema } from "./sign-in-schema";
 
 export function SignInForm() {
+  const [_, setCookie] = useCookies();
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     validationSchema: SignInSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: () => {
+      setCookie(AUTH_COOKIE_NAME, true, {
+        path: "/",
+        sameSite: "strict",
+      });
+
+      navigate(HOME_PAGE_PATH);
     },
   });
 

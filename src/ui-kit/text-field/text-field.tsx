@@ -3,7 +3,7 @@ import React from "react";
 
 export type UiTextFieldProps = {
   id: string;
-  name: string;
+  name?: string;
   type?: "text" | "number";
   label: string;
   error?: boolean;
