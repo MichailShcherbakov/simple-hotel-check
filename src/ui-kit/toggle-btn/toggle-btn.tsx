@@ -27,7 +27,7 @@ const NextToggleButtonState: Record<
 export function UiToggleButton(props: UiToggleButtonProps) {
   const {
     label,
-    state = UiToggleButtonStateEnum.DESC,
+    state = UiToggleButtonStateEnum.ASC,
     className,
     disabled,
     onChange,

@@ -6,7 +6,7 @@ export function SignInPage() {
   return (
     <div className="relative w-screen h-screen">
       <img
-        src="public/images/background.png"
+        src="images/background.png"
         alt="background image"
         className="absolute top-0 left-0 w-screen h-screen blur-md"
       />
