@@ -3,6 +3,7 @@ import React from "react";
 import "./btn.scss";
 
 export type UiButtonProps = {
+  type?: "button" | "submit";
   className?: string;
   children?: React.ReactNode;
 };

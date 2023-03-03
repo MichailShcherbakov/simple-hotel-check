@@ -1,9 +1,9 @@
 import clsx from "clsx";
+import React from "react";
 
-export type TextFieldValue = string | number | readonly string[] | undefined;
-
-export type UiTextFieldProps<TValue extends TextFieldValue> = {
+export type UiTextFieldProps = {
   id: string;
+  name: string;
   type?: "text" | "number";
   label: string;
   error?: boolean;
@@ -11,13 +11,11 @@ export type UiTextFieldProps<TValue extends TextFieldValue> = {
   labelClassName?: string;
   min?: number;
   max?: number;
-  value?: TValue;
-  onChange?: (value: TValue) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export function UiTextField<TValue extends TextFieldValue>(
-  props: UiTextFieldProps<TValue>,
-) {
+function _UiTextField(props: UiTextFieldProps) {
   const {
     id,
     label,
@@ -32,15 +30,19 @@ export function UiTextField<TValue extends TextFieldValue>(
   } = props;
 
   function changeHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value as TValue;
+    const value = e.target.value;
 
     if (type === "number") {
-      return onChange?.(
-        Math.max(min, Math.min(max, value as number)) as TValue,
-      );
+      return onChange?.({
+        ...e,
+        target: {
+          ...e.target,
+          value: Math.max(min, Math.min(max, Number(value))).toString(),
+        },
+      });
     }
 
-    onChange?.(value);
+    onChange?.(e);
   }
 
   return (
@@ -72,3 +74,5 @@ export function UiTextField<TValue extends TextFieldValue>(
     </div>
   );
 }
+
+export const UiTextField = React.memo(_UiTextField);
