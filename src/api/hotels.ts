@@ -1,7 +1,5 @@
 import { Hotel } from "../store/hotel/type";
 
-const API_URL = "http://engine.hotellook.com/api/v2/cache.json";
-
 export type GetHotelsOptions = {
   location: string;
   checkIn: string;
@@ -21,7 +19,9 @@ export const HotelApi = {
     } = options;
 
     const req = await fetch(
-      `${API_URL}?location=${location}&currency=${currency}&checkIn=${checkIn}&checkOut=${checkOut}&limit=${limit}`,
+      `${
+        import.meta.env.VITE_API_URL
+      }?location=${location}&currency=${currency}&checkIn=${checkIn}&checkOut=${checkOut}&limit=${limit}`,
     );
 
     const data: Hotel[] = await req.json();
