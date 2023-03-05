@@ -34,7 +34,7 @@ function _HotelCard(props: HotelCardProps) {
   }
 
   return (
-    <div className="flex flex-col w-full gap-1">
+    <div className="flex flex-col w-full gap-1 pb-4 border-b border-b-gray-50 last:border-b-0">
       <div className="flex flex-row items-center justify-between">
         <p className="text-gray-500 font-base font-light">{title}</p>
         <UiLikeButton value={pinned} onChange={pinnedChangedHandler} />

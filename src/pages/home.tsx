@@ -43,7 +43,11 @@ export function HomePage() {
             </div>
             <div className="flex flex-row item-center">
               <p className="font-light text-gray-500 text-base">
-                Добавлено в Избранное: {Object.values(hotels).length} отеля
+                Добавлено в Избранное:{" "}
+                <b className="font-medium text-base">
+                  {Object.values(hotels).length}
+                </b>{" "}
+                отеля
               </p>
             </div>
             <HotelList />
