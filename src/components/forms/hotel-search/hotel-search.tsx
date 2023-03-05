@@ -1,12 +1,14 @@
 import { useFormik } from "formik";
 import { DateTime } from "luxon";
-import { useHotelCriteria } from "../../../store/hotel/hooks";
+import { useHotelCriteria, useHotels } from "../../../store/hotel/hooks";
 import { UiButton } from "../../../ui-kit/btn";
+import { UiLoading } from "../../../ui-kit/loading";
 import { UiTextField } from "../../../ui-kit/text-field";
 import { HotelSearchSchema } from "./hotel-search-schema";
 
 export function HotelSearchForm() {
   const { setHotelCriteria, criteria } = useHotelCriteria();
+  const { isLoading } = useHotels();
 
   const formik = useFormik({
     initialValues: {
@@ -62,7 +64,14 @@ export function HotelSearchForm() {
           helperText={formik.errors.numDays}
         />
       </div>
-      <UiButton type="submit">Найти</UiButton>
+      <UiButton
+        type="submit"
+        disabled={isLoading}
+        className="flex flex-row items-center justify-center"
+      >
+        {isLoading && <UiLoading size={24} className="text-white" />}
+        {!isLoading && <span>Найти</span>}
+      </UiButton>
     </form>
   );
 }

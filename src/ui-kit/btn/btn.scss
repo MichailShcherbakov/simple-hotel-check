@@ -1,7 +1,7 @@
 .ui-btn-bg {
   background: linear-gradient(104.34deg, #41522e -15.34%, #be8022 145.95%);
 
-  &:hover {
+  &:enabled:hover {
     background: linear-gradient(
         0deg,
         rgba(255, 255, 255, 0.2),
@@ -10,7 +10,7 @@
       linear-gradient(104.34deg, #41522e -15.34%, #be8022 145.95%);
   }
 
-  &:active {
+  &:enabled:active {
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
       linear-gradient(104.34deg, #41522e -15.34%, #be8022 145.95%);
   }

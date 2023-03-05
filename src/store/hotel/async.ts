@@ -16,7 +16,7 @@ export function* getHotels(action: PayloadAction<GetHotelsOptions>) {
     yield put({ type: setHotelsAction.type, payload: { hotels } });
     yield put({
       type: setHotelsRequestStatusAction.type,
-      payload: { status: HotelRequestStatusEnum.HOTELS_REQUESTED },
+      payload: { status: HotelRequestStatusEnum.HOTELS_RECEIVED },
     });
   } catch (error) {
     yield put({

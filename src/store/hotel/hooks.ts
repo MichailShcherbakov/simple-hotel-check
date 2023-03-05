@@ -7,6 +7,7 @@ import {
   setHotelCriteriaAction,
   unpinHotelAction,
 } from "./actions";
+import { HotelRequestStatusEnum } from "./state";
 
 export function useHotelCriteria() {
   const criteria = useAppSelector(state => state.hotels.criteria);
@@ -24,6 +25,13 @@ export function useHotelCriteria() {
 
 export function useHotels() {
   const hotels = useAppSelector(state => state.hotels.all);
+  const isLoading = useAppSelector(
+    state => state.hotels.status === HotelRequestStatusEnum.HOTELS_REQUESTED,
+  );
+  const isError = useAppSelector(
+    state =>
+      state.hotels.status === HotelRequestStatusEnum.HOTELS_REQUEST_FAILED,
+  );
   const criteria = useAppSelector(state => state.hotels.criteria);
 
   const dispatch = useAppDispatch();
@@ -39,6 +47,8 @@ export function useHotels() {
   return {
     loadHotels,
     hotels,
+    isLoading,
+    isError,
   };
 }
 
