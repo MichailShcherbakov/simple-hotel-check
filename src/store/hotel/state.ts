@@ -18,8 +18,8 @@ export enum HotelRequestStatusEnum {
 }
 
 export type HotelState = {
-  all: Record<number, Hotel>;
-  pinned: Record<string, Hotel>;
+  all: Record<Hotel["hotelId"], Hotel>;
+  pinned: Record<Hotel["suggestionId"], Hotel>;
   criteria: {
     location: string;
     checkIn: string;

@@ -6,8 +6,11 @@ import "swiper/css/mousewheel";
 import { Mousewheel } from "swiper";
 
 import "./carousel.scss";
+import { useGalleryPictures } from "../../store/gallery/hooks";
 
 export function Carousel() {
+  const { pictures } = useGalleryPictures();
+
   return (
     <Swiper
       slidesPerView="auto"
@@ -16,10 +19,10 @@ export function Carousel() {
       modules={[Mousewheel]}
       className="w-full h-min"
     >
-      {new Array(10).fill(0).map((_, idx) => (
-        <SwiperSlide key={idx}>
+      {Object.values(pictures).map(pic => (
+        <SwiperSlide key={pic.id}>
           <img
-            src={`images/pic${(idx % 4) + 1}.jpg`}
+            src={pic.uri}
             alt="picture"
             className="w-42 h-38 rounded-xl object-cover carousel-cell-box-shadow"
           />
