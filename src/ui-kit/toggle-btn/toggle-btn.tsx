@@ -4,16 +4,18 @@ import { ReactComponent as SelectIcon } from "../../assets/icons/select.svg";
 import "./toggle-btn.scss";
 
 export enum UiToggleButtonStateEnum {
-  ASC = "asc",
-  DESC = "desc",
+  ASC = "ASC",
+  DESC = "DESC",
 }
 
 export type UiToggleButtonProps = {
+  id: string;
+  name?: string;
   label: string;
-  state?: UiToggleButtonStateEnum;
+  state?: "ASC" | "DESC";
   disabled?: boolean;
   className?: string;
-  onChange?: (state: UiToggleButtonStateEnum) => void;
+  onChange?: (state: UiToggleButtonStateEnum, id: string) => void;
 };
 
 const NextToggleButtonState: Record<
@@ -24,8 +26,9 @@ const NextToggleButtonState: Record<
   [UiToggleButtonStateEnum.DESC]: UiToggleButtonStateEnum.ASC,
 };
 
-export function UiToggleButton(props: UiToggleButtonProps) {
+export function _UiToggleButton(props: UiToggleButtonProps) {
   const {
+    id,
     label,
     state = UiToggleButtonStateEnum.ASC,
     className,
@@ -34,7 +37,7 @@ export function UiToggleButton(props: UiToggleButtonProps) {
   } = props;
 
   function clickHandler() {
-    onChange?.(NextToggleButtonState[state]);
+    onChange?.(NextToggleButtonState[state], id);
   }
 
   return (
@@ -48,7 +51,6 @@ export function UiToggleButton(props: UiToggleButtonProps) {
         className,
       )}
       onClick={clickHandler}
-      disabled={disabled}
     >
       <span
         className={clsx("text-sm font-base ", {
@@ -68,3 +70,5 @@ export function UiToggleButton(props: UiToggleButtonProps) {
     </button>
   );
 }
+
+export const UiToggleButton = React.memo(_UiToggleButton);

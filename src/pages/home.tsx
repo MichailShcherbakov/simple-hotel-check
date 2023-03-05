@@ -3,11 +3,10 @@ import { AppBar } from "../components/app-bar";
 import { Carousel } from "../components/carousel";
 import { HotelSearchForm } from "../components/forms/hotel-search";
 import { HotelList } from "../components/list/hotels";
-import { PinnedHotelList } from "../components/list/pinned-hotels";
 import { LogOutButton } from "../components/log-out-btn";
+import { PinnedHotelPanel } from "../components/panels/pinned";
 import { useHotelCriteria, usePinnedHotels } from "../store/hotel/hooks";
 import { UiPaper } from "../ui-kit/paper";
-import { UiToggleButton } from "../ui-kit/toggle-btn";
 
 export function HomePage() {
   const { criteria } = useHotelCriteria();
@@ -22,14 +21,7 @@ export function HomePage() {
             <UiPaper className="w-90">
               <HotelSearchForm />
             </UiPaper>
-            <UiPaper className="flex flex-col gap-8 w-full h-full overflow-hidden">
-              <p className="text-2xl text-gray-500 font-medium">Избранное</p>
-              <div className="flex flex-row items-center gap-2">
-                <UiToggleButton label="Рейтинг" />
-                <UiToggleButton label="Цена" disabled />
-              </div>
-              <PinnedHotelList />
-            </UiPaper>
+            <PinnedHotelPanel />
           </div>
           <UiPaper className="flex flex-col w-full px-8 py-12 gap-7 overflow-hidden">
             <div className="flex flex-row items-center justify-between w-full">
