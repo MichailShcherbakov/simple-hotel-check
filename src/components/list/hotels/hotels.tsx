@@ -18,6 +18,7 @@ export function HotelList() {
     <div className="flex flex-col w-full h-full overflow-auto pr-3 gap-4 scrollbar-thin scrollbar-w-1 scrollbar-thumb-rounded scrollbar-thumb-green-400 scrollbar-track-gray-50">
       {Object.values(hotels).map(hotel => (
         <HotelCard
+          withLogo
           pinned={isPinned(hotel.suggestionId)}
           key={hotel.suggestionId}
           suggestionId={hotel.suggestionId}
