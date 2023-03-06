@@ -4,6 +4,7 @@ import { HomePage } from "./pages/home";
 import { SignInPage } from "./pages/sign-in";
 import { store } from "./store";
 import { Provider as ReduxProvider } from "react-redux";
+import { PageNotFoundPage } from "./pages/404";
 
 export const SIGN_IN_PAGE_PATH = "/sign-in";
 export const HOME_PAGE_PATH = "/";
@@ -22,5 +23,6 @@ export const router = createBrowserRouter([
         </AuthProvider>
       </ReduxProvider>
     ),
+    errorElement: <PageNotFoundPage />,
   },
 ]);
