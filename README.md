@@ -2,6 +2,8 @@
 
 ## 🖼 Preview
 
+<a href="https://simple-hotel-check-dev-project.netlify.app/">Link</a>
+
 <img alt src="https://github.com/MichailShcherbakov/simple-hotel-check/blob/master/screenshots/main.png?raw=true" />
 
 ## 🚀 Stack

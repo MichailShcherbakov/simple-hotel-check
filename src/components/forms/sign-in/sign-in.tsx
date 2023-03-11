@@ -44,6 +44,7 @@ export function SignInForm() {
         />
         <UiTextField
           id="password"
+          type="password"
           name="password"
           label="Пароль"
           value={formik.values.password}
