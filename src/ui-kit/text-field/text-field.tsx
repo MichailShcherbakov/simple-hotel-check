@@ -4,7 +4,7 @@ import React from "react";
 export type UiTextFieldProps = {
   id: string;
   name?: string;
-  type?: "text" | "number" | "date" | "password";
+  type?: "text" | "number" | "date" | "password" | "type" | "email";
   label: string;
   error?: boolean;
   helperText?: string;

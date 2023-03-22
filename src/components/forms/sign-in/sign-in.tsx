@@ -36,6 +36,7 @@ export function SignInForm() {
         <UiTextField
           id="email"
           name="email"
+          type="email"
           label="Логин"
           value={formik.values.email}
           onChange={formik.handleChange}

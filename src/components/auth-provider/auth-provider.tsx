@@ -32,7 +32,7 @@ export function AuthProvider(props: AuthProviderProps) {
     setIsAuth(isAuth);
 
     if (!isAuth) navigate(SIGN_IN_PAGE_PATH);
-  }, [cookies]);
+  }, [cookies, navigate]);
 
   return (
     <AuthContext.Provider
