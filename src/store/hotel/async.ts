@@ -1,5 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { call, CallEffect, put, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest, all, fork, select } from "redux-saga/effects";
+import { RootState } from "..";
 import { GetHotelsOptions, HotelApi } from "../../api/hotels";
 import {
   requestHotelsAction,
@@ -26,6 +27,18 @@ export function* getHotels(action: PayloadAction<GetHotelsOptions>) {
   }
 }
 
+export function* loadInitialHotels() {
+  const criteria = yield select((state: RootState) => state.hotels.criteria);
+
+  yield put({
+    type: requestHotelsAction.type,
+    payload: criteria,
+  });
+}
+
 export function* watchHotelsRequest() {
-  yield takeLatest(requestHotelsAction.type, getHotels);
+  yield all([
+    yield fork(loadInitialHotels),
+    yield takeLatest(requestHotelsAction.type, getHotels),
+  ]);
 }

@@ -1,10 +1,11 @@
 import React from "react";
+import { PinnedHotelListOrderBy } from "~/store/hotel/hooks";
 import { UiPaper } from "../../ui-kit/paper";
 import {
   UiToggleButton,
   UiToggleButtonStateEnum,
 } from "../../ui-kit/toggle-btn";
-import { PinnedHotelList, PinnedHotelListOrderBy } from "../list/pinned-hotels";
+import { PinnedHotelList } from "../list/pinned-hotels";
 
 const RATING_TOGGLE_BTN_ID = "RATING_TOGGLE_BTN_ID";
 const PRICE_TOGGLE_BTN_ID = "PRICE_TOGGLE_BTN_ID";

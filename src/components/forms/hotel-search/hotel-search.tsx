@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { DateTime } from "luxon";
+import { GetHotelsOptions } from "../../../api/hotels";
 import { useHotelCriteria, useHotels } from "../../../store/hotel/hooks";
 import { UiButton } from "../../../ui-kit/btn";
 import { UiLoading } from "../../../ui-kit/loading";
@@ -8,7 +9,7 @@ import { HotelSearchSchema } from "./hotel-search-schema";
 
 export function HotelSearchForm() {
   const { setHotelCriteria, criteria } = useHotelCriteria();
-  const { isLoading } = useHotels();
+  const { isLoading, loadHotels } = useHotels();
 
   const formik = useFormik({
     initialValues: {
@@ -18,13 +19,16 @@ export function HotelSearchForm() {
     },
     validationSchema: HotelSearchSchema,
     onSubmit(value) {
-      setHotelCriteria({
+      const criteria: GetHotelsOptions = {
         location: value.location,
         checkIn: value.checkIn,
         checkOut: DateTime.fromISO(value.checkIn)
           .plus({ days: value.numDays })
           .toISODate(),
-      });
+      };
+
+      setHotelCriteria(criteria);
+      loadHotels(criteria);
     },
   });
 

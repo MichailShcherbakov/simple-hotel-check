@@ -1,4 +1,5 @@
-import React from "react";
+import { createSelector } from "@reduxjs/toolkit";
+import { RootState } from "..";
 import { GetHotelsOptions } from "../../api/hotels";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
@@ -8,6 +9,7 @@ import {
   unpinHotelAction,
 } from "./actions";
 import { HotelRequestStatusEnum } from "./state";
+import { Hotel } from "./type";
 
 export function useHotelCriteria() {
   const criteria = useAppSelector(state => state.hotels.criteria);
@@ -32,17 +34,12 @@ export function useHotels() {
     state =>
       state.hotels.status === HotelRequestStatusEnum.HOTELS_REQUEST_FAILED,
   );
-  const criteria = useAppSelector(state => state.hotels.criteria);
 
   const dispatch = useAppDispatch();
 
   function loadHotels(options: GetHotelsOptions) {
     dispatch(requestHotelsAction(options));
   }
-
-  React.useEffect(() => {
-    loadHotels(criteria);
-  }, [criteria]);
 
   return {
     loadHotels,
@@ -76,8 +73,38 @@ export function usePinHotel() {
   };
 }
 
-export function usePinnedHotels() {
-  const hotels = useAppSelector(state => state.hotels.pinned);
+export type PinnedHotelListOrderBy = {
+  price?: "ASC" | "DESC";
+  rating?: "ASC" | "DESC";
+};
+
+export function orderHotelsBy(
+  a: Hotel,
+  b: Hotel,
+  orderBy: PinnedHotelListOrderBy = { price: "ASC" },
+) {
+  if (orderBy.rating === "ASC") {
+    return a.stars === b.stars ? 0 : a.stars < b.stars ? -1 : 1;
+  } else if (orderBy.rating === "DESC") {
+    return a.stars === b.stars ? 0 : a.stars > b.stars ? -1 : 1;
+  } else if (orderBy.price === "ASC") {
+    return a.priceFrom === b.priceFrom ? 0 : a.priceFrom < b.priceFrom ? -1 : 1;
+  }
+
+  return a.priceFrom === b.priceFrom ? 0 : a.priceFrom > b.priceFrom ? -1 : 1;
+}
+
+const selectPinnedHotels = createSelector(
+  (state: RootState) => state.hotels.pinned,
+  (_: RootState, orderBy: PinnedHotelListOrderBy) => orderBy,
+  (pinnedHotels, orderBy) =>
+    Object.values(pinnedHotels).sort((a, b) => orderHotelsBy(a, b, orderBy)),
+);
+
+export function usePinnedHotels(
+  orderBy: PinnedHotelListOrderBy = { price: "ASC" },
+) {
+  const hotels = useAppSelector(state => selectPinnedHotels(state, orderBy));
 
   return {
     hotels,
