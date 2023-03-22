@@ -8,9 +8,23 @@ import { PinnedHotelPanel } from "../components/panels/pinned";
 import { useHotelCriteria, usePinnedHotels } from "../store/hotel/hooks";
 import { UiPaper } from "../ui-kit/paper";
 
+function hotelDeclination(days: number): string {
+  if (days % 10 === 1 && days !== 11) {
+    return "отель";
+  }
+
+  if (days % 10 >= 2 && days % 10 <= 4 && days / 10 !== 1) {
+    return "отеля";
+  }
+
+  return "отелей";
+}
+
 export function HomePage() {
   const { criteria } = useHotelCriteria();
   const { hotels } = usePinnedHotels();
+
+  const numHotels = hotels.length;
 
   return (
     <div className="relative w-screen h-screen flex flex-col bg-gray-10">
@@ -44,10 +58,8 @@ export function HomePage() {
             <div className="flex flex-row item-center">
               <p className="font-light text-gray-500 text-base">
                 Добавлено в Избранное:{" "}
-                <b className="font-medium text-base">
-                  {Object.values(hotels).length}
-                </b>{" "}
-                отеля
+                <b className="font-medium text-base">{numHotels}</b>{" "}
+                {hotelDeclination(numHotels)}
               </p>
             </div>
             <HotelList />

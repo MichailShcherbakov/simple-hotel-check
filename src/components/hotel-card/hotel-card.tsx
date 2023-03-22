@@ -17,6 +17,18 @@ export type HotelCardProps = {
   onUnpin?: (suggestionId: string) => void;
 };
 
+function dayDeclination(days: number): string {
+  if (days % 10 === 1 && days !== 11) {
+    return "день";
+  }
+
+  if (days % 10 >= 2 && days % 10 <= 4 && days / 10 !== 1) {
+    return "дня";
+  }
+
+  return "дней";
+}
+
 function _HotelCard(props: HotelCardProps) {
   const {
     title,
@@ -34,6 +46,11 @@ function _HotelCard(props: HotelCardProps) {
   function pinnedChangedHandler(flag: boolean) {
     flag ? onPin?.(suggestionId) : onUnpin?.(suggestionId);
   }
+
+  const days = Interval.fromDateTimes(
+    DateTime.fromISO(checkIn),
+    DateTime.fromISO(checkOut),
+  ).length("days");
 
   return (
     <div className="flex flex-row w-full pb-4 gap-6 border-b border-b-gray-50 last:border-b-0">
@@ -53,11 +70,7 @@ function _HotelCard(props: HotelCardProps) {
           </p>
           <hr className="w-2.5" />
           <p className="text-gray-400 font-normal text-sm">
-            {Interval.fromDateTimes(
-              DateTime.fromISO(checkIn),
-              DateTime.fromISO(checkOut),
-            ).length("days")}{" "}
-            дней
+            {days} {dayDeclination(days)}
           </p>
         </div>
         <div className="flex flex-row items-center justify-between gap-4">
